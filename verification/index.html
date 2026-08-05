@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>What was checked — Project: Isekai Gacha</title>
+    <link rel="stylesheet" href="/isekai-showcase/assets/index-07YCJdg0.css" />
+  </head>
+  <body>
+    <main class="layer layer-doc" data-room="dusk">
+      <div class="layer-inner doc">
+        <p class="t-label-caps doc-eyebrow"><a href="/isekai-showcase/">Project: Isekai Gacha</a></p>
+        <h1 class="t-name-world doc-title">What was checked</h1>
+        <p class="t-body doc-blurb">What has actually been verified in a browser, and what has not. An unverified claim here is worse than an absent one.</p>
+
+        <article class="doc-body"><p>What has actually been checked, and what has not. Written honestly — an
+unverified claim here is worse than an absent one.</p>
+<h2>Verified in a browser</h2>
+<p>Checked at a 320×720 viewport, which is narrower than any phone this needs to
+serve, and at desktop.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Horizontal overflow at 320px</td>
+<td>None. Document scroll width equals client width.</td>
+</tr>
+<tr>
+<td>Elements extending past the viewport</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>Tap targets below the 44px floor</td>
+<td>None, after the two fixes below.</td>
+</tr>
+<tr>
+<td>WebGL canvas mounts and sits behind every layer</td>
+<td>Yes — <code>z-index: 0</code> against layers at <code>1</code>.</td>
+</tr>
+<tr>
+<td>Canvas hidden from assistive technology</td>
+<td>Yes — <code>aria-hidden</code>, <code>pointer-events: none</code>.</td>
+</tr>
+<tr>
+<td>Room tone changes while object colour holds</td>
+<td>Yes, confirmed by eye across all four tones.</td>
+</tr>
+<tr>
+<td>Typefaces load and render at their specified weights</td>
+<td>Yes — Grenze, Familjen Grotesk, Martian Mono.</td>
+</tr>
+</tbody></table>
+<p>Two tap-target defects were found and fixed during this pass:</p>
+<ul>
+<li>Area groups in the field measured about 25px tall. They now carry the
+system&#39;s <code>--size-tap-min</code> floor.</li>
+<li>The token is 40px by the design system&#39;s own sizing, which is under the
+floor. Its hit area was grown to 44px while the disc stays at 40 — redrawing
+the token at the wrong size to satisfy a tap rule would have been the wrong
+trade.</li>
+</ul>
+<h2>Verified in a browser — the colour foundation</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The whole v2 foundation is on the page</td>
+<td>Yes — 598 swatches, 524 distinct values: 50 named colours with nine-step ramps, 15 interface roles, the dark, light, high-contrast and rarity sets, and the Object UI palette on top.</td>
+</tr>
+<tr>
+<td>A swatch copies its own value</td>
+<td>Yes — clicked the 700 step of Carmine Red in a real browser; <code>#A62C37</code> reached the clipboard and the swatch confirmed.</td>
+</tr>
+<tr>
+<td>Every swatch is reachable by keyboard</td>
+<td>Yes — each is a real <code>&lt;button&gt;</code> with an accessible name carrying its name and value.</td>
+</tr>
+<tr>
+<td>Nothing on the page advertises the feature</td>
+<td>Yes — asserted by test. It says it copied only after it has, and only for a moment.</td>
+</tr>
+<tr>
+<td>The ramp marks the named colour&#39;s own step</td>
+<td>Yes — by weight, not by a rule or a ring.</td>
+</tr>
+<tr>
+<td>Type specimens name the job, not a line from the page</td>
+<td>Yes — Title, Subheading, Object name, Epithet, Label, Body copy, and the numerals.</td>
+</tr>
+</tbody></table>
+<h2>Verified in a browser — the dragon&#39;s flight</h2>
+<p>Checked at 430×900 (a phone in portrait) and at 1410×1203, on a fresh load each
+time, with the live values read out of the frame loop rather than judged by eye.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Visible and fully in frame at the opening, portrait</td>
+<td>Yes — after the placement rework. It was entirely off the side before.</td>
+</tr>
+<tr>
+<td>Visible and fully in frame at the opening, desktop</td>
+<td>Yes. It was clipped by the left edge before.</td>
+</tr>
+<tr>
+<td>Clear of the text through the roadmap, portrait</td>
+<td>Body in the gutter; a wingtip grazes the occasional small label. See the residual below.</td>
+</tr>
+<tr>
+<td>Clear of the text through the roadmap, desktop</td>
+<td>Yes.</td>
+</tr>
+<tr>
+<td>Only the flight set is fetched before it appears</td>
+<td>Yes — <code>wyvern.glb</code>, <code>fly</code>, <code>hover</code>, <code>glide</code>. No arrival clips.</td>
+</tr>
+<tr>
+<td>Arrival clips fetched by the time the bottom is reached</td>
+<td>Yes — all six present, from the second boundary.</td>
+</tr>
+<tr>
+<td>Lands at the very bottom</td>
+<td>Yes — <code>settled</code> reaches 1, <code>landed</code> true, playing the grounded idle.</td>
+</tr>
+<tr>
+<td>Feet on the footer bar rather than a wingtip</td>
+<td>Yes — ten foot and toe bones found; the lowest converges onto the measured bar line to within 1e-7.</td>
+</tr>
+<tr>
+<td>Lands at full size, not the narrow-window size</td>
+<td>Yes.</td>
+</tr>
+</tbody></table>
+<p>Four defects were found during this pass and fixed. Each is recorded as a
+gotcha in <code>HANDOFF.md</code>, because each looked like something else first:</p>
+<ul>
+<li>Stations stated in world units put the creature off the side of a phone.</li>
+<li>The landing was being routed, so it never arrived.</li>
+<li>The landing was being shrunk by the narrow-window rule that exists to keep it
+off text there is none of beside the footer.</li>
+<li>An unsized camera reports an aspect of zero over zero, and one NaN frame
+poisons the eased size for the rest of the session.</li>
+</ul>
+<p><strong>Residual, stated rather than implied.</strong> On a 430-wide viewport the reading
+column is 88% of the screen. There is no placement where a visible creature
+never touches it. It now sits in the gutter at about a sixth of the screen
+width and grazes the occasional label, against crossing headlines at half the
+width before. On a desktop window the column is 44% and there is real margin.</p>
+<h2>Verified without a browser</h2>
+<ul>
+<li><strong>373 tests</strong> across the generators, the copy, the page, the objects, the
+scroll layer, the field, the 3D gate, and the flight — the spring, the
+routes, the manoeuvres, the clip machine and the placement each have their
+own suite of pure functions with no WebGL context.</li>
+<li><strong>No JavaScript at all</strong>: the built <code>dist/index.html</code> contains all five
+layers as real HTML, including the opening lines, the loop, the objects
+section, the unbuilt count, the doors and the contact address.</li>
+<li><strong>No border declaration</strong> anywhere in the shipped CSS. No <code>&lt;hr&gt;</code>. No gold
+heading. Nothing scaling past 1.04. Nothing fading in.</li>
+<li><strong>No internal vocabulary</strong> in any visitor-facing string, and no internal
+identifier in the rendered page.</li>
+</ul>
+<h2>Weight</h2>
+<p>What a device on the lowest tier downloads:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Raw</th>
+<th>gzip</th>
+<th>brotli</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>index.html</code> (prerendered)</td>
+<td>278.8 KB</td>
+<td>19.7 KB</td>
+<td>13.1 KB</td>
+</tr>
+<tr>
+<td><code>index.js</code></td>
+<td>265.2 KB</td>
+<td>79.5 KB</td>
+<td>67.5 KB</td>
+</tr>
+<tr>
+<td><code>index.css</code></td>
+<td>24.3 KB</td>
+<td>5.6 KB</td>
+<td>4.8 KB</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>568.3 KB</strong></td>
+<td><strong>104.8 KB</strong></td>
+<td><strong>85.4 KB</strong></td>
+</tr>
+</tbody></table>
+<p>The HTML is large raw and small compressed, because 598 swatches of prerendered
+markup are as repetitive as markup gets — it compresses fourteen to one. The
+raw figure is the one worth ignoring; the wire figure is the one that matters.</p>
+<p>Plus 224 KB of self-hosted fonts, cached after first visit.</p>
+<p>The three.js chunk is <strong>848 KB and is not referenced from the HTML at all</strong>.
+It is fetched only when the device tier is above zero, so a phone that will
+not use it never pays for it. The dragon is a further <strong>62 KB of code</strong> and
+<strong>914 KB of geometry and clips</strong>, on the top tier only, split across two
+boundaries:</p>
+<table>
+<thead>
+<tr>
+<th>Set</th>
+<th>Files</th>
+<th>Size</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Flight</td>
+<td>mesh, <code>hover</code>, <code>fly</code>, <code>glide</code></td>
+<td>490 KB</td>
+<td>with the component</td>
+</tr>
+<tr>
+<td>Arrival</td>
+<td><code>takeoff</code>, <code>landing</code>, <code>ground</code></td>
+<td>424 KB</td>
+<td>once the reader passes halfway</td>
+</tr>
+</tbody></table>
+<p>First appearance therefore costs 490 KB — less than the 650 KB it cost before
+<code>glide</code> and <code>takeoff</code> were added at all, because the three clips that only
+matter at the very bottom no longer hold it up.</p>
+<h2>Not verified</h2>
+<p>Stated plainly rather than implied:</p>
+<ul>
+<li><strong>No real device has run this.</strong> Every check above was made in a desktop
+browser at a phone-sized viewport. Viewport size is not thermal behaviour,
+and it is not iOS Safari.</li>
+<li><strong>Frame rate on mid-range hardware is unmeasured.</strong> The draw-call budget is
+argued structurally — one instanced mesh for every mote plus three shaft
+cones, four calls against a mobile budget of about fifty — but no frame time
+has been recorded on real hardware.</li>
+<li><strong>Context loss has not been observed in the wild.</strong> The teardown path is
+unit-tested against a synthetic event. It has not been triggered by actually
+backgrounding the page on an iPhone, which is the case it exists for.</li>
+<li><strong>The device tier heuristic is untuned.</strong> It combines a WebGL probe, core
+count, pointer type and viewport size, and biases downward when they
+disagree. Whether it makes the right call on real mid-range Android is
+unknown.</li>
+</ul>
+<h3>The pass that still needs doing</h3>
+<ol>
+<li>Open the page on an iPhone and on a mid-range Android, in portrait, one
+handed. Scroll the whole descent.</li>
+<li>Background and foreground the tab several times, then keep scrolling. The
+page must either recover or fall back to the DOM page. It must never show a
+black screen.</li>
+<li>Watch for thermal throttling on a long scroll.</li>
+<li>Record what happened in this file.</li>
+</ol>
+</article>
+
+        <nav class="doc-nav">
+          <p class="t-label-caps doc-nav-heading">Also here</p>
+          <ul class="doc-nav-list">
+            <li><a class="t-body" href="/isekai-showcase/plan-dragon-flight/">Plan — the dragon’s flight</a></li>
+            <li><a class="t-body" href="/isekai-showcase/handoff/">Handoff</a></li>
+            <li><a class="t-body" href="/isekai-showcase/">Back to the page</a></li>
+          </ul>
+        </nav>
+      </div>
+    </main>
+  </body>
+</html>
