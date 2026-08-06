@@ -159,6 +159,53 @@ column is 88% of the screen. There is no placement where a visible creature
 never touches it. It now sits in the gutter at about a sixth of the screen
 width and grazes the occasional label, against crossing headlines at half the
 width before. On a desktop window the column is 44% and there is real margin.</p>
+<h2>Verified in a browser — the published site</h2>
+<p>Checked against <code>https://austin-blair.github.io/isekai-showcase/</code>, not a local
+server, because the failure this guards against only appears once the site is
+served from a subdirectory rather than a domain root.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Every route resolves</td>
+<td><code>/</code>, the three document pages, <code>robots.txt</code>, the fonts, the creature geometry and the Draco decoder all 200.</td>
+</tr>
+<tr>
+<td>Requests that failed</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>Typefaces under the subpath</td>
+<td>All three load. This is the case that breaks first: Vite leaves a <code>url(/fonts/…)</code> into the public directory alone, so without the rewrite the page silently falls back to system fonts.</td>
+</tr>
+<tr>
+<td>WebGL canvas initialises</td>
+<td>Yes — drawing buffer sized to the viewport rather than the 300×150 default.</td>
+</tr>
+<tr>
+<td>Creature geometry and decoder</td>
+<td>Both load from <code>/isekai-showcase/</code>, and the dragon flies.</td>
+</tr>
+<tr>
+<td>Colour booklet</td>
+<td>598 swatches present.</td>
+</tr>
+<tr>
+<td>Kept out of search</td>
+<td><code>noindex, nofollow</code> on every page, and <code>robots.txt</code> disallows everything.</td>
+</tr>
+</tbody></table>
+<p><strong>One diagnosis worth keeping.</strong> Mid-check the dragon stopped loading and the
+base path looked responsible. It was not: stashing the change and finding the
+same failure at the previous commit showed the browser had run out of WebGL
+contexts after a long session of reloads. The tell is a canvas left at its
+default 300×150 with correctly sized parents — the renderer never initialised.
+A fresh tab clears it. Verify a graphics change in a new tab before believing a
+regression.</p>
 <h2>Verified without a browser</h2>
 <ul>
 <li><strong>373 tests</strong> across the generators, the copy, the page, the objects, the

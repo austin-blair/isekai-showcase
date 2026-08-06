@@ -258,7 +258,16 @@ comment in <code>Atmosphere.tsx</code> overstates it.</li>
 particle effects would have to be rebuilt.</li>
 <li><strong><code>public/draco/</code> is 752KB</strong> for the decoder, fetched only above tier 0.
 Dropping Draco would remove it at the cost of larger geometry.</li>
-<li><strong>No hosting yet.</strong> No domain, no deploy step.</li>
+<li><strong>Hosted on GitHub Pages, no domain.</strong> Live at
+<code>austin-blair.github.io/isekai-showcase/</code>, served from a separate public repo
+holding only the built output — this source tree is not published. Deploy is
+manual: build with <code>SITE_BASE=/isekai-showcase/</code>, copy <code>dist/</code> into that repo,
+push. There is no CI step and no custom domain.</li>
+<li><strong>The link is unlisted, not private.</strong> <code>noindex, nofollow</code> plus a <code>robots.txt</code>
+disallow keep it out of search, and that is the whole of the protection —
+anyone holding the address can read everything, including the working notes.
+A static host cannot do better; a real gate means moving to something with a
+server in front of it, such as Cloudflare Access.</li>
 <li>The spec names four object sets; only two are tokenised, so the booklet shows
 two. Tokenise the others and they appear with no code change.</li>
 <li><strong>The booklet is 598 swatches of prerendered HTML</strong> — 279KB raw, which sounds
